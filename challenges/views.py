@@ -4,16 +4,16 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 
 monthly_challenges = {
-    "january": "Eat no meat for the entire montn!",
+    "january": "Eat no meat for the entire month!",
     "february": "Walk for at least 20 minutes every day!",
     "march": "Learn Django for at least 20 minutes very day!",
-    "april": "Eat no meat for the entire montn!",
+    "april": "Eat no meat for the entire month!",
     "may": "Walk for at least 20 minutes every day!",
     "june": "Learn Django for at least 20 minutes very day!",
     "july": "Eat no meat for the entire montn!",
     "august": "Walk for at least 20 minutes every day!",
     "september": "Learn Django for at least 20 minutes very day!",
-    "october": "Eat no meat for the entire montn!",
+    "october": "Eat no meat for the entire month!",
     "november": "Walk for at least 20 minutes every day!",
     "december": "Learn Django for at least 20 minutes very day!"
 }
@@ -47,6 +47,9 @@ def monthly_challenge_by_number(request, month):
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return render(request, "challenges/challenge.html")
+        return render(request, "challenges/challenge.html", {
+            "month_name": month.capitalize(),
+            "text": challenge_text
+        })
     except:
         return HttpResponseNotFound("<h1>This month is not supported.</h1>")
